@@ -1,0 +1,72 @@
+{
+    "num_simulations": 1,
+    "num_days": 2000,
+    "daily_utilisations": {
+        "main": {
+            "after_day": 0,
+            "distribution": "normal",
+            "min": 0,
+            "mean": 1,
+            "std": 2,
+            "max": 24
+        },
+        "secondary": {
+            "after_day": 500,
+            "distribution": "normal",
+            "min": 0,
+            "mean": 17,
+            "std": 17,
+            "max": 24
+        },
+        "third": {
+            "after_day": 1000,
+            "distribution": "normal",
+            "min": 0,
+            "mean": 0,
+            "std": 3,
+            "max": 24
+        },
+        "fourth": {
+            "after_day": 1500,
+            "distribution": "normal",
+            "min": 0,
+            "mean": 30,
+            "std": 4,
+            "max": 24
+        }
+    },
+    "parameters": {
+        "package_cycle": 2000,
+        "items": {
+            "replace couplings": 2000,
+            "overhaul": 8000,
+            "replace pump": 16000
+        },
+        "annual_estimate": 5000,
+        "annual_estimate_recalculate_after_days": [
+            7,
+            30,
+            90,
+            120
+        ],
+        "suppressed": true,
+        "completion_requirement": false,
+        "early_shift_factors": [
+            0,
+            0.5,
+            1
+        ],
+        "late_shift_factors": [
+            0,
+            0.5,
+            1
+        ],
+        "call_horizon_days": [
+            30,
+            60,
+            90,
+            120,
+            180
+        ]
+    }
+}
