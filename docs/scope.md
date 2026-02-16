@@ -2,7 +2,8 @@
 
 ## In Scope
 
-- Monte Carlo-style daily utilisation generation for one or more simulations.
+- Monte Carlo-style daily utilisation generation for one or more simulations of SAP maintenance plan execution.
+  - Run each scenario a minimum of 100 time for a report 
 - Configuration-driven parameters via `config.json`.
 - Work-order schedule creation from:
   - item cycles
@@ -16,6 +17,14 @@
   - completion counters
   - recalculated annual estimates
 - Export of simulation outputs for inspection.
+- Reporting of multiple simulations to show plan expectations.
+  - Overview
+    - Show call variance histogram
+    - Show counter variance between items histograms (individual work variance)
+    - Show min and max call variance, and min and max individual work variance
+  - Detailed
+    - Show an individual run Planned vs Actual Counter
+    - Show an individual counter variance by call 
 
 ## Out of Scope (Current State)
 
