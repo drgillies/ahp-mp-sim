@@ -2,68 +2,61 @@
 
 ## Branch Name
 
-`chore/project-standards-docs-foundation`
+`bug/last_report`
 
 ## Branch Goal
 
-Create and align the project foundation across documentation, standards, and code structure so contributors can work with consistent rules and a stable `src`-based Python layout.
+Fix the failing automated test discovery run by aligning stale import paths in `tests/test_smoke.py` with the current `src` package layout.
 
 ## Problem Statement
 
-The project started without a complete standards baseline, structured docs, or a clear branch documentation process. Core simulation code also needed alignment with the documented standards (reduced side effects, safer parameter handling, and test coverage). In addition, environment/run workflows were not standardized around `uv`, and directory layout needed consolidation under `src/`.
+`uv run python -m unittest discover -s tests -v` was failing because `tests/test_smoke.py` imported from `simulation.*`, while the project code now lives under `src.simulation.*`. This caused `ModuleNotFoundError` and blocked a clean test pass for the branch.
 
 ## Scope
 
 ### In Scope
 
-- Create project documentation in `docs/` (overview, scope, architecture, runbook, known issues).
-- Create and apply project standards in `standards/`.
-- Restructure code to `src/simulation/` and add `src/utils/` for reusable helpers.
-- Fix identified simulation defects and add regression tests.
-- Standardize environment and run workflow with `uv`.
+- Update `tests/test_smoke.py` imports to use `src.simulation.*`.
+- Re-run full unittest discovery and confirm all tests pass.
+- Update branch documentation to reflect current branch purpose and validation.
 
 ### Out of Scope
 
-- New simulation feature development beyond defect fixes/refactor.
-- API/service layer implementation.
-- Production deployment and CI/CD automation.
+- Refactor simulation logic.
+- Modify report/dashboard behavior.
+- Introduce new features.
 
 ## Acceptance Criteria
 
-- [x] Standards defined (`project`, `git`, `code`).
-- [x] Standards reflected in code structure and implementation updates.
-- [x] Project documentation created and indexed.
+- [x] Test imports aligned with current package structure.
+- [x] `uv run python -m unittest discover -s tests -v` passes with no errors.
+- [x] Branch documentation updated to reflect actual work completed.
 
 ## Technical Plan
 
-1. Create baseline docs and standards in dedicated directories.
-2. Refactor simulation code to address defects and reduce runtime side effects.
-3. Restructure package layout to `src/` and introduce `src/utils/` for shared helpers.
-4. Add tests and validate runtime behavior.
-5. Adopt and verify `uv` workflow; update standards/runbook accordingly.
+1. Inspect failing test module imports.
+2. Replace deprecated `simulation.*` imports with `src.simulation.*`.
+3. Run full test suite and verify green.
 
 ## Risks and Mitigations
 
-- Risk: Directory/layout refactors can break imports and runtime entrypoints.
-  - Mitigation: Update imports immediately and validate with tests plus `main` execution.
-- Risk: Standards/docs drift from implementation.
-  - Mitigation: Update docs in the same branch and validate against actual commands run.
+- Risk: Additional stale imports may exist in other test files.
+  - Mitigation: Use full unittest discovery after fix to detect any remaining path errors.
 
 ## Validation Plan
 
 - Command: `uv run python -m unittest discover -s tests -v`
-- Command: `uv run python -c "import main; main.main(plot=False)"`
-- Expected result: tests pass and the program runs without runtime errors in non-plot mode.
+- Expected result: all tests pass and no import errors occur.
 
 ## Documentation Updates
 
-- [x] Update runbook/docs for behavior changes.
-- [x] Update standards for new conventions (`uv`, `src/utils`, branch template).
-- [x] Update known issues status where fixes were completed.
+- [x] Update branch documentation for this bug-fix branch.
+- [ ] No standards changes required.
+- [ ] No runbook/architecture changes required.
 
 ## PR Notes
 
 - Linked issue/task: N/A
 - Review focus areas:
-  - Simulation correctness and returned multi-simulation output behavior.
-  - Package layout/import updates (`src/simulation`, `src/utils`) and `uv` workflow alignment.
+  - `tests/test_smoke.py` import-path correctness.
+  - Test-suite pass confirmation (`5 passed`).

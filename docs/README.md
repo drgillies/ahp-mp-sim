@@ -10,6 +10,7 @@ This folder contains project documentation for the AHP maintenance planning simu
 - `runbook.md`: How to run the project and expected outputs.
 - `known-issues.md`: Current technical risks and defects to address.
 - `branch-documentation-template.md`: Template for documenting branch intent and delivery plan.
+- `branch-documentation.md`: Active branch documentation record.
 
 ## Suggested Reading Order
 

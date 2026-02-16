@@ -15,6 +15,7 @@ This file tracks observed defects and technical risks in the current codebase.
 
 - Simulation still relies on row-wise DataFrame `.apply` for recalculation logic and may be slow at very large scales.
 - CSV export is enabled by default in `run_simulation`; callers should disable it for pure in-memory runs.
+- Current `main.py` call path writes run CSVs to project root unless `output_dir` is explicitly set.
 
 ## Test Coverage Gaps
 
