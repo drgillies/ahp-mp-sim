@@ -27,6 +27,12 @@ From project root:
 uv run python main.py
 ```
 
+Generate last-run reports:
+
+```bash
+uv run python last_run_report.py
+```
+
 ## Current Runtime Behavior
 
 - Loads `config.json`
@@ -40,13 +46,17 @@ uv run python main.py
 
 ## Outputs
 
-- Console logs from simulation loop
 - CSV files:
   - `work_order_sim_0.csv` (and additional IDs when multiple simulations are run)
+  - Note: this default location comes from current `main.py` usage of `run_simulation(...)`.
+- Report files:
+  - `reports/last_run_report.md`
+  - `reports/last_run_report.html`
+  - `reports/last_run_assets/*.png`
 - Matplotlib window when plotting enabled
 
 ## Configuration Notes
 
 - `daily_utilisations` phases are applied by increasing `after_day`.
 - List values in `parameters` are expanded into combinations.
-- Long simulations may run slowly due to current debug sleeps and frequent writes.
+- To change CSV output location, pass `output_dir` to `run_simulation(...)`.

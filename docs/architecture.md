@@ -3,6 +3,7 @@
 ## Repository Structure
 
 - `main.py`: Program entrypoint and plotting workflow.
+- `last_run_report.py`: Builds last-run markdown and HTML reports with visuals.
 - `config.json`: Runtime configuration.
 - `src/simulation/config_loader.py`: Config loading and parameter combination generation.
 - `src/simulation/utilisation.py`: Daily utilisation generator by phase/distribution.
@@ -24,8 +25,9 @@
    - iterates day-by-day for each simulation
    - recalculates calls and annual estimates on cadence
    - marks call/completion transitions
-   - writes simulation CSV output
+   - writes simulation CSV output (default: project root unless `output_dir` is provided)
 5. `main.py` filters completed rows and plots selected columns.
+6. `last_run_report.py` reads the latest run CSV (prefers `data/`, then root), and writes reports into `reports/`.
 
 ## Core Data Entities
 

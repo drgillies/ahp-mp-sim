@@ -1,7 +1,7 @@
 import unittest
 
-from simulation.config_loader import generate_parameter_combinations
-from simulation.montecarlo import build_counter_data
+from src.simulation.config_loader import generate_parameter_combinations
+from src.simulation.montecarlo import build_counter_data
 
 
 class SmokeTests(unittest.TestCase):
