@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Last Run Dashboard</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e5e7eb;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f9fbff 0%, #eef3fb 100%);
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 0 16px 24px;
+    }
+    .header {
+      margin-bottom: 16px;
+    }
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 1.9rem;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 16px 0 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .label {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .value {
+      margin-top: 6px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .section {
+      margin-top: 20px;
+    }
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+    .charts {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+    .charts img {
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <h1>Last Run Dashboard</h1>
+      <div class="meta">Source: work_order_sim_0.csv | Generated: 2026-02-16T15:00:10</div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><div class="label">Planned Work Orders</div><div class="value">22</div></div>
+      <div class="card"><div class="label">Called Work Orders</div><div class="value">18</div></div>
+      <div class="card"><div class="label">Completed Work Orders</div><div class="value">15</div></div>
+      <div class="card"><div class="label">Completion Rate</div><div class="value">68.2%</div></div>
+      <div class="card"><div class="label">Avg Planned Counter</div><div class="value">15,461.35</div></div>
+      <div class="card"><div class="label">Avg Actual Counter</div><div class="value">15,971.09</div></div>
+      <div class="card"><div class="label">Counter Variance (A-P)</div><div class="value">509.74</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Run Visuals</h2>
+      <div class="charts">
+        <img src="last_run_assets/completion_counter_trend.png" alt="Planned vs actual counter trend">
+        <img src="last_run_assets/counter_variance.png" alt="Counter variance by call">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

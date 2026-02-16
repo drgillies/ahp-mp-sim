@@ -54,3 +54,4 @@ Thumbs.db
 
 # Project-generated outputs
 work_order_sim_*.csv
+data/work_order_sim_*.csv

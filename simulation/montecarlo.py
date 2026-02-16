@@ -3,6 +3,7 @@ from .utilisation import generate_utilisation
 from .parameters import get_parameters
 from .annual_estimate import recalculate_annual_estimate
 from time import sleep
+from pathlib import Path
 
 def build_counter_data(config: dict):
     """Run a Monte Carlo simulation for SAP maintenance planning."""
@@ -45,7 +46,7 @@ def build_work_order_schedule(parameter_config: dict) -> pd.DataFrame:
     Expands items, cycles, and parameter combinations into a long-form DataFrame.
     """
     # Extract parameters
-    annual_estimate = parameter_config.get("annual_estimate", 0)
+    annual_estimate = float(parameter_config.get("annual_estimate", 0))
     suppressed = parameter_config.get("suppressed", False)
     completion_requirement = parameter_config.get(
         "completion_requirement", True)
@@ -151,7 +152,7 @@ def build_work_order_schedule(parameter_config: dict) -> pd.DataFrame:
     return filtered_df
 
 
-def run_simulation(df: pd.DataFrame, parameter_config: dict) -> pd.DataFrame:
+def run_simulation(df: pd.DataFrame, parameter_config: dict, output_dir: str = "data") -> pd.DataFrame:
     """
     Run a simulation on utilisation data given a specific parameter set.
 
@@ -164,6 +165,8 @@ def run_simulation(df: pd.DataFrame, parameter_config: dict) -> pd.DataFrame:
     """
     # Copy df to avoid modifying the original
     df = df.copy()
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
 
     work_order_df = build_work_order_schedule(parameter_config)
 
@@ -241,7 +244,7 @@ def run_simulation(df: pd.DataFrame, parameter_config: dict) -> pd.DataFrame:
         # work_order_df['call_counter'] = work_order_df['next_planned_counter'] - \
         #     work_order_df['units_prior_for_call']
         
-        work_order_df.to_csv(f'work_order_sim_{sim}.csv', index=False)
+        work_order_df.to_csv(output_path / f'work_order_sim_{sim}.csv', index=False)
         # sleep(.3)
         return work_order_df
     
@@ -337,6 +340,7 @@ def run_simulation(df: pd.DataFrame, parameter_config: dict) -> pd.DataFrame:
                 start_day = max(1, day - 29)  # avoid negative or zero days
                 cumulative_list = sim_df.loc[start_day:day, "utilisation"].tolist()
                 annual_estimate = recalculate_annual_estimate(cumulative_list)
+                sim_work_order_df['annual_estimate'] = sim_work_order_df['annual_estimate'].astype(float)
                 sim_work_order_df.loc[sim_work_order_df['called'] == False, 'annual_estimate'] = annual_estimate
                 units_prior_for_call = annual_estimate / 365 * call_horizon_days
                 sim_work_order_df = adjust_unit_prior_for_call(
@@ -368,6 +372,6 @@ def run_simulation(df: pd.DataFrame, parameter_config: dict) -> pd.DataFrame:
                     
             print('end of day:', day, 'sim:', sim, 'counter:', cumulative)# 'call_counters:', call_counters, 'completion_days:', completion_days)
         print(sim_work_order_df)
-        sim_work_order_df.to_csv(f'work_order_sim_{sim}.csv', index=False)
+        sim_work_order_df.to_csv(output_path / f'work_order_sim_{sim}.csv', index=False)
     # print(df)
     return sim_work_order_df
