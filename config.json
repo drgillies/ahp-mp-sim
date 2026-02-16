@@ -6,8 +6,8 @@
             "after_day": 0,
             "distribution": "normal",
             "min": 0,
-            "mean": 1,
-            "std": 2,
+            "mean": 17,
+            "std": 30,
             "max": 24
         },
         "secondary": {
@@ -23,7 +23,7 @@
             "distribution": "normal",
             "min": 0,
             "mean": 0,
-            "std": 3,
+            "std": 30,
             "max": 24
         },
         "fourth": {
@@ -52,21 +52,14 @@
         "suppressed": true,
         "completion_requirement": false,
         "early_shift_factors": [
-            0,
-            0.5,
             1
+
         ],
         "late_shift_factors": [
-            0,
-            0.5,
             1
         ],
         "call_horizon_days": [
-            30,
-            60,
-            90,
-            120,
-            180
+            220
         ]
     }
 }
